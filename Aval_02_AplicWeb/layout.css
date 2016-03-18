@@ -1,0 +1,35 @@
+.botao1{
+	float: left;
+	position: absolute;
+	left: 135px;
+}
+.botao2{
+	float: left;
+	position: absolute;
+	left: 300px;
+}
+
+.erronome{
+	font-size: 11px;
+	color: red;
+	position: relative;
+	left: 130px;
+}
+.errodata{
+	font-size: 11px;
+	color: red;
+}
+.erroemail{
+	font-size: 11px;
+	color: red;
+	position: relative;
+	left: 130px;
+}
+.caixanome{
+	position: relative;
+	left: 130px;
+}
+.caixaemail{
+	position: relative;
+	left: 130px;
+}
