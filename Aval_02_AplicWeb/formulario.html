@@ -1,0 +1,122 @@
+//Feito por Giovani e Bruna
+
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<title>Formulário</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="layout.css">
+		<script type="text/javascript" src="jquery-2.1.1.min.js" ></script>
+		<script type="text/javascript" src="jquery.maskedinput.js"></script>
+		<script type="text/javascript" >
+			function escondeerros() {
+				$(".erronome").hide();
+				$(".errodata").hide();
+				$(".erroemail").hide();
+				$(".caixadata").mask("99/99/9999");
+			}
+			function verificar() {
+				var verificacao = true;
+				var nomepessoa = document.querySelector(".caixanome").value;
+				if(nomepessoa.length < 10){
+						$(".erronome").show();
+						verificacao = false;
+				}
+				var data_quebrada = document.querySelector(".caixadata").value.split("/");
+					dia = data_quebrada[0];
+					mes = data_quebrada[1];
+					ano = data_quebrada[2];
+					if (dia < 0 || dia > 31) {
+						$(".errodata").show();
+						verificacao = false;
+					}
+					if (mes>0 && mes<=12) {
+						if(mes == 2) {
+							if(dia < 30) {
+								if((ano%4==0)&&(ano%100!=0)) {
+								}else {
+									if (dia==29) {
+										$(".errodata").show();
+										verificacao = false;
+									}
+								}
+							}else{
+								$(".errodata").show();
+								verificacao = false;
+							}
+						}else if((mes!=1)&&(mes!=3)&&(mes!=5)&&(mes!=7)&&(mes!=8)&&(mes!=10)&&(mes!=12)){
+							if (dia==31) {
+								$(".errodata").show();
+								verificacao = false;	
+							}
+						}
+					}else{
+						$(".errodata").show();
+						verificacao = false;
+					}
+				var qteletras = document.querySelector(".caixaemail").value.length;
+				var email = document.querySelector(".caixaemail").value;
+				var temarroba = false;
+				for(var i=0;i<qteletras;i++) {
+					if (email[i] == "@") {
+						temarroba = true;
+					}
+				}
+				if(temarroba == false) {
+					$(".erroemail").show();
+					verificacao = false;
+				}
+				if(verificacao == true){
+					alert("Dados gravados com sucesso!");
+				}				
+			}
+			
+			
+			
+			
+			function limpar() {
+				$(".erronome").hide();
+				$(".errodata").hide();
+				$(".erroemail").hide();
+				document.querySelector(".caixanome").value = "";
+				document.querySelector(".caixadata").value = "";
+				document.querySelector(".caixaemail").value = "";
+			}
+		</script>
+	</head>
+	<body onload="escondeerros()">
+		<div class="topo">
+			<h1>Formulário de inscrição</h1>
+			<hr>
+		</div>
+		<div class="formulario">
+			<br><br>
+			<div class="linha1">
+				<strong>Nome:</strong>
+				<input type="text" name="caixanome" class="caixanome">
+				<label class="erronome"> Nome inválido </label>
+			</div>
+			<div class="linha2">
+				<br>
+				<strong>Data de Nascimento:</strong>
+				<input type="text" name="caixadata" class="caixadata">
+				<label class="errodata"> Data inválida </label>		
+			</div>
+			<div class="linha3">
+				<br>
+				<strong>Email:</strong>
+				<input type="text" name="caixaemail" class="caixaemail"/>	
+				<label class="erroemail"> E-mail inválido </label>			
+			</div>
+			<div class="linha4">
+					<p></p>
+					<div class="botao1">
+						<input type="button" name="limpar"  value="Limpar" onclick="limpar()"/>
+					</div>
+					<div class="botao2">
+						<input type="button" name="enviar" value="Enviar" onclick="verificar()"/>	
+					</div>
+			</div>	
+		</div>
+	</body>
+</html>
